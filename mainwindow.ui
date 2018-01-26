@@ -204,6 +204,13 @@
          </property>
         </spacer>
        </item>
+       <item>
+        <widget class="QPushButton" name="settingButton">
+         <property name="text">
+          <string>Настройки порта</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
     </layout>
