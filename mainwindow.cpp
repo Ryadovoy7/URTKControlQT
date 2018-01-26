@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(onTick()));
     timer->start(100);
+    //sup
 }
 
 MainWindow::~MainWindow()
