@@ -1,25 +1,22 @@
 //---------------------------------------------------------------------------
 #include "port.h"
 
-URTKPort::URTKPort()
+URTKPort::URTKPort(QObject *parent) : QObject(parent)
 {
-	LptData = 0xE800;
-	LptStatus = 0xE801;
-	LptConfig = 0xE802;
+    LptData = (byte)0xE800;
+    LptStatus = (byte)0xE801;
+    LptConfig = (byte)0xE802;
 }
 
-URTKPort::URTKPort(std::string pathToSettings)
+URTKPort::URTKPort( byte data, byte status, byte config, QObject *parent) : QObject(parent)
 {
-
+    LptData = data;
+    LptStatus = status;
+    LptConfig = config;
 }
 
 URTKPort::~URTKPort()
 {
-}
-
-void URTKPort::LoadSettings(std::string pathToSettings)
-{
-	//load from file "settings.txt"
 }
 
 //////////////////////////////////////////////////////////////////////////////

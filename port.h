@@ -1,24 +1,22 @@
+#ifndef PORT_H
+#define PORT_H
 
-#pragma once
-
+#include <QObject>
 #include "Const.h"
 #include <Windows.h>
-#include <string>
 #include <inpout32.h>
 
 
-struct URTKPort
+class URTKPort : public QObject
 {
+    //Q_OBJECT
 
-	URTKPort();
-	URTKPort(std::string pathToSettings);
+public:
+    URTKPort(QObject *parent = 0);
+    URTKPort(byte data, byte status, byte config, QObject *parent = 0);
 	~URTKPort();
 
-	byte LptData = 0xE800;
-	byte LptStatus = 0xE801;
-	byte LptConfig = 0xE802;
-
-	void LoadSettings(std::string pathToSettings);
+    byte LptData, LptStatus, LptConfig;
 
 	int SetLedRegs(byte led);
 	int CheckOnline(void);
@@ -39,7 +37,7 @@ private:
 	byte ReadR();
 };
 
-
+#endif
 
 
 

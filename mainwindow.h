@@ -9,6 +9,7 @@
 #include <QFileDialog>
 #include <QTextCodec>
 #include <QTimer>
+#include "Algorithm.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,8 +20,13 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+    void loadSettings(QString pathToSettings);
+    QMap<QString, QString> settings;
+
+    Algorithm* alg;
 
 private slots:
     void on_saveButton_clicked();
