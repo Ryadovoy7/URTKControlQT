@@ -9,7 +9,7 @@
 
 class URTKPort : public QObject
 {
-    //Q_OBJECT
+    Q_OBJECT
 
 public:
     URTKPort(QObject *parent = 0);
@@ -35,6 +35,10 @@ private:
 	int GetKbdRegs(byte * kbd0, byte * kbd1);
 	void XorBit(byte * DataByte, byte BitNum);
 	byte ReadR();
+
+signals:
+
+public slots:
 };
 
 #endif

@@ -37,14 +37,21 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     Algorithm.cpp \
-    port.cpp
+    port.cpp \
+    operation.cpp \
+    move.cpp \
+    grab.cpp \
+    calibr.cpp
 
 HEADERS += \
         mainwindow.h \
     Const.h \
     Algorithm.h \
-    Const.h \
-    port.h
+    port.h \
+    operation.h \
+    move.h \
+    grab.h \
+    calibr.h
 
 FORMS += \
         mainwindow.ui \
