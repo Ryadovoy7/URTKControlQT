@@ -2,11 +2,12 @@
 #define GRAB_H
 
 #include <QObject>
+#include "operation.h"
 
 class Grab : public Operation
 {
 public:
-    Grab(QVector<int> arguments = nullptr, QObject *parent = nullptr);
+    Grab(QVector<int> *arguments, QObject *parent = 0);
 };
 
 #endif // GRAB_H

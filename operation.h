@@ -9,7 +9,7 @@ class Operation : public QObject
 {
     Q_OBJECT
 public:
-    explicit Operation(QVector<int> arguments = nullptr, QObject *parent = nullptr);
+    explicit Operation(QVector<int> *arguments, QObject *parent = 0);
     virtual void run(byte olddvg0, byte olddvg1);
     virtual void checkCompletion(byte olddvg0, byte olddvg1);
 
