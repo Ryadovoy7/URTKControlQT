@@ -14,6 +14,7 @@ public:
     virtual void checkCompletion(byte olddvg0, byte olddvg1);
 
     QVector<int> argList;
+    QVector<int> runVar;
 
     bool isCompleted, isStarted;
 

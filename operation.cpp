@@ -9,10 +9,10 @@ Operation::Operation(QVector<int> arguments, QObject *parent) : QObject(parent)
 
 void Operation::run(byte olddvg0, byte olddvg1)
 {
-    //blank, parent class
+    //blank, superclass
 }
 
 void Operation::checkCompletion(byte olddvg0, byte olddvg1)
 {
-    //blank, parent class
+    //blank, superclass
 }
