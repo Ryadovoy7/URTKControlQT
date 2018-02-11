@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     loadSettings("settings.txt");
 
-    alg = new Algorithm(settings);
+    alg = new Algorithm(0);
 }
 
 MainWindow::~MainWindow()

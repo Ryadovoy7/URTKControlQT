@@ -5,7 +5,7 @@ Grab::Grab(QVector<int> arguments, QObject *parent) : Operation(arguments, paren
 
 }
 
-void Grab::run(byte olddvg0, byte olddvg1)
+void Grab::run(byte olddvg0, byte olddvg1, URTKPort* port)
 {
     // Проверям аргументы
     if ((argList.size() >= 2) && (argList[0] >= 0) && (argList[0] <= 3) && (argList[1] >= 0) && (argList[1] <= 1))
@@ -19,7 +19,7 @@ void Grab::run(byte olddvg0, byte olddvg1)
         // Активируем или деактивируем захват нужной степени
         dvgbyte[argList[0]] = argList[1];
 
-        SetDvgRegs(dvg0 = CountDvg0(3, 3, 3, 3, dvg0), dvg1 = CountDvg1(3, 3, dvgbyte[0], dvgbyte[1], dvgbyte[2], dvgbyte[3], dvg1));
+        port->SetDvgRegs(dvg0 = port->CountDvg0(3, 3, 3, 3, dvg0), dvg1 = port->CountDvg1(3, 3, dvgbyte[0], dvgbyte[1], dvgbyte[2], dvgbyte[3], dvg1));
 
         // Мы закончили операцию захвата, проверять нечего
         isStarted = 1;
@@ -32,7 +32,7 @@ void Grab::run(byte olddvg0, byte olddvg1)
     }
 }
 
-void Grab::checkCompletion(byte olddvg0, byte olddvg1)
+void Grab::checkCompletion(byte olddvg0, byte olddvg1, URTKPort* port)
 {
     // Захват заканчивается на функции run(), поэтому здесь пусто
 }

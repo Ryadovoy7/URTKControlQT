@@ -10,8 +10,10 @@ class Operation : public QObject
     Q_OBJECT
 public:
     explicit Operation(QVector<int> arguments, QObject *parent = 0);
-    virtual void run(byte olddvg0, byte olddvg1);
-    virtual void checkCompletion(byte olddvg0, byte olddvg1);
+    virtual void run(byte olddvg0, byte olddvg1, URTKPort* port);
+    virtual void checkCompletion(byte olddvg0, byte olddvg1, URTKPort* port);
+
+    byte dvg0 = 0, dvg1 = 0;
 
     QVector<int> argList;
     QVector<int> runVar;
@@ -21,6 +23,7 @@ public:
 signals:
 
 public slots:
+
 };
 
 #endif // OPERATION_H

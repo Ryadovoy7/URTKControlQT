@@ -7,12 +7,12 @@ Operation::Operation(QVector<int> arguments, QObject *parent) : QObject(parent)
     argList = arguments;
 }
 
-void Operation::run(byte olddvg0, byte olddvg1)
+void Operation::run(byte olddvg0, byte olddvg1, URTKPort* port)
 {
     //blank, superclass
 }
 
-void Operation::checkCompletion(byte olddvg0, byte olddvg1)
+void Operation::checkCompletion(byte olddvg0, byte olddvg1, URTKPort* port)
 {
     //blank, superclass
 }
