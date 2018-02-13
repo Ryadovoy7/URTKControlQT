@@ -5,7 +5,7 @@ Move::Move(QVector<int> arguments, QObject *parent) : Operation(arguments, paren
     runVar.resize(3);
 }
 
-void Move::run(byte olddvg0, byte olddvg1, URTKPort* port)
+void Move::run(byte& dvg0, byte& dvg1, URTKPort* port)
 {
     if ((argList.size() >= 3) && (argList[0] >= 0) && (argList[0] <= 5) && (argList[1] >= -1) && (argList[1] <= 1) && (argList[2] >= 0) && (argList[2] <= 500))
     {
@@ -17,7 +17,7 @@ void Move::run(byte olddvg0, byte olddvg1, URTKPort* port)
         
         dvgbyte[argList[0]] = argList[1];
         
-        port->SetDvgRegs(dvg0 = port->CountDvg0(dvgbyte[0], dvgbyte[1], dvgbyte[2], dvgbyte[3], olddvg0), dvg1 = port->CountDvg1(dvgbyte[4], dvgbyte[5], 3, 3, 3, 3, olddvg1));
+        port->SetDvgRegs(dvg0 = port->CountDvg0(dvgbyte[0], dvgbyte[1], dvgbyte[2], dvgbyte[3], dvg0), dvg1 = port->CountDvg1(dvgbyte[4], dvgbyte[5], 3, 3, 3, 3, dvg1));
         
         byte s0, s1, s2;
         port->GetSnsRegs(&s0, &s1, &s2);
@@ -45,7 +45,7 @@ void Move::run(byte olddvg0, byte olddvg1, URTKPort* port)
     }
 }
 
-void Move::checkCompletion(byte olddvg0, byte olddvg1, URTKPort* port)
+void Move::checkCompletion(byte& dvg0, byte& dvg1, URTKPort* port)
 {
     byte s0, s1, s2;
     port->GetSnsRegs(&s0, &s1, &s2);
@@ -101,7 +101,7 @@ void Move::checkCompletion(byte olddvg0, byte olddvg1, URTKPort* port)
 
         dvgbyte[argList[0]] = 0;
 
-        port->SetDvgRegs(dvg0 = port->CountDvg0(dvgbyte[0], dvgbyte[1], dvgbyte[2], dvgbyte[3], olddvg0), dvg1 = port->CountDvg1(dvgbyte[4], dvgbyte[5], 3, 3, 3, 3, olddvg1));
+        port->SetDvgRegs(dvg0 = port->CountDvg0(dvgbyte[0], dvgbyte[1], dvgbyte[2], dvgbyte[3], dvg0), dvg1 = port->CountDvg1(dvgbyte[4], dvgbyte[5], 3, 3, 3, 3, dvg1));
 
         isCompleted = 1;
     }

@@ -5,7 +5,7 @@ Grab::Grab(QVector<int> arguments, QObject *parent) : Operation(arguments, paren
 
 }
 
-void Grab::run(byte olddvg0, byte olddvg1, URTKPort* port)
+void Grab::run(byte& dvg0, byte& dvg1, URTKPort* port)
 {
     // Проверям аргументы
     if ((argList.size() >= 2) && (argList[0] >= 0) && (argList[0] <= 3) && (argList[1] >= 0) && (argList[1] <= 1))
@@ -32,7 +32,7 @@ void Grab::run(byte olddvg0, byte olddvg1, URTKPort* port)
     }
 }
 
-void Grab::checkCompletion(byte olddvg0, byte olddvg1, URTKPort* port)
+void Grab::checkCompletion(byte& dvg0, byte& dvg1, URTKPort* port)
 {
     // Захват заканчивается на функции run(), поэтому здесь пусто
 }

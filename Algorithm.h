@@ -6,6 +6,8 @@
 #include <QObject>
 #include <QMap>
 #include <QVector>
+#include <QPair>
+#include <QRegExp>
 
 #include "operation.h"
 #include "calibr.h"
@@ -20,8 +22,10 @@ public:
     ~Algorithm();
     URTKPort* LPTPort;
 
-    void algInit(const QMap<QString,QString> &settings);
+    void algInit(const QMap<QString,QString> &settings, QString algText);
     void algEnd();
+
+
 
     void timerEvent(QTimerEvent *event);
     int timerID;
@@ -29,8 +33,11 @@ public:
 private:
 
     QVector<QVector<Operation*>> opVec;
-    void readAlgorithm();
+    void readAlgorithm(QString algText);
+
     void portInit(const QMap<QString,QString> &settings);
+
+    void clearOpVec();
 
 signals:
 

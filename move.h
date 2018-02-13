@@ -10,8 +10,8 @@ class Move : public Operation
     Q_OBJECT
 public:
     Move(QVector<int> arguments, QObject *parent = 0);
-    void run(byte olddvg0, byte olddvg1, URTKPort* port);
-    void checkCompletion(byte olddvg0, byte olddvg1, URTKPort* port);
+    void run(byte& dvg0, byte& dvg1, URTKPort* port);
+    void checkCompletion(byte& dvg0, byte& dvg1, URTKPort* port);
 };
 
 #endif // MOVE_H

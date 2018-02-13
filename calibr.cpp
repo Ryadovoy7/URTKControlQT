@@ -5,7 +5,7 @@ Calibr::Calibr(QVector<int> arguments, QObject *parent) : Operation(arguments, p
 
 }
 
-void Calibr::run(byte olddvg0, byte olddvg1, URTKPort* port)
+void Calibr::run(byte& dvg0, byte& dvg1, URTKPort* port)
 {
     // Проверим правильность предоставленных аргументов
     if ((argList.size() >= 1) && (argList[0] >= 0) && (argList[0] <= 5))
@@ -22,7 +22,7 @@ void Calibr::run(byte olddvg0, byte olddvg1, URTKPort* port)
         dvgbyte[argList[0]] = -1;
 
         // Отправим байт
-        port->SetDvgRegs(dvg0 = port->CountDvg0(dvgbyte[0], dvgbyte[1], dvgbyte[2], dvgbyte[3], olddvg0), dvg1 = port->CountDvg1(dvgbyte[4], dvgbyte[5], 3, 3, 3, 3, olddvg1));
+        port->SetDvgRegs(dvg0 = port->CountDvg0(dvgbyte[0], dvgbyte[1], dvgbyte[2], dvgbyte[3], dvg0), dvg1 = port->CountDvg1(dvgbyte[4], dvgbyte[5], 3, 3, 3, 3, dvg1));
 
         // Мы начали выполнение команды
         isStarted = 1;
@@ -34,7 +34,7 @@ void Calibr::run(byte olddvg0, byte olddvg1, URTKPort* port)
     }
 }
 
-void Calibr::checkCompletion(byte olddvg0, byte olddvg1, URTKPort* port)
+void Calibr::checkCompletion(byte& dvg0, byte& dvg1, URTKPort* port)
 {
     // Проверим концевые датчики
     byte s0, s1, s2;
@@ -62,7 +62,7 @@ void Calibr::checkCompletion(byte olddvg0, byte olddvg1, URTKPort* port)
         // то мы прекращаем движение
         dvgbyte[argList[1]] = 0;
 
-        port->SetDvgRegs(dvg0 = port->CountDvg0(dvgbyte[0], dvgbyte[1], dvgbyte[2], dvgbyte[3], olddvg0), dvg1 = port->CountDvg1(dvgbyte[4], dvgbyte[5], 3, 3, 3, 3, olddvg1));
+        port->SetDvgRegs(dvg0 = port->CountDvg0(dvgbyte[0], dvgbyte[1], dvgbyte[2], dvgbyte[3], dvg0), dvg1 = port->CountDvg1(dvgbyte[4], dvgbyte[5], 3, 3, 3, 3, dvg1));
 
         // Операция калибровки выполнена
         isCompleted = 1;
