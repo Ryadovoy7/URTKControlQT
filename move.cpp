@@ -2,7 +2,7 @@
 
 Move::Move(QVector<int> arguments, QObject *parent) : Operation(arguments, parent)
 {
-    runVar.resize(3);
+    runVar.resize(4);
 }
 
 void Move::run(byte& dvg0, byte& dvg1, URTKPort* port)
@@ -31,9 +31,10 @@ void Move::run(byte& dvg0, byte& dvg1, URTKPort* port)
         sensors[4] = port->TestBit(&s2, 2);
         sensors[5] = port->TestBit(&s2, 5);
         
-        runVar[0] = 30;
+        runVar[0] = 0;
         runVar[1] = sensors[argList[0]];
         runVar[2] = argList[1];
+        runVar[3] = startTimer(100);
         
         isStarted = 1;
         
@@ -73,11 +74,7 @@ void Move::checkCompletion(byte& dvg0, byte& dvg1, URTKPort* port)
     sensors[4] = port->TestBit(&s2, 2);
     sensors[5] = port->TestBit(&s2, 5);
 
-    if (runVar[0] > 0)
-    {
-        runVar[0]--;
-    }
-    else
+    if (runVar[0])
     {
 
         if ((m[argList[0]][0] == 1) || (m[argList[0]][1] == 1))
@@ -105,4 +102,10 @@ void Move::checkCompletion(byte& dvg0, byte& dvg1, URTKPort* port)
 
         isCompleted = 1;
     }
+}
+
+void Move::timerEvent(QTimerEvent *event)
+{
+    runVar[0] = 1;
+    killTimer(runVar[3]);
 }

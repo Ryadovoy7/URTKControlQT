@@ -9,6 +9,7 @@
 #include <QFileDialog>
 #include <QTextCodec>
 #include <QTimer>
+#include <QMessageBox>
 #include "Algorithm.h"
 
 namespace Ui {
@@ -37,8 +38,16 @@ private slots:
 
     void on_runButton_clicked();
 
+    void on_alg_ended();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+
+    bool algRunning;
+    bool serverRunning;
+    bool settingsOpened;
 };
 
 #endif // MAINWINDOW_H

@@ -16,6 +16,11 @@ MainWindow::MainWindow(QWidget *parent) :
     loadSettings("settings.txt");
 
     alg = new Algorithm(0);
+    connect(alg, SIGNAL(algFinished()), this, SLOT(on_alg_ended()));
+
+    algRunning = false;
+    serverRunning = false;
+    settingsOpened = false;
 }
 
 MainWindow::~MainWindow()
@@ -82,8 +87,35 @@ void MainWindow::onTick()
 
 void MainWindow::on_runButton_clicked()
 {
-    QWidget *testWindow = new QWidget();
-    Ui::ScriptWindow uiScript;
-    uiScript.setupUi(testWindow);
-    testWindow->show();
+    if (!algRunning)
+    {
+        //alg->algWindow->show();
+        alg->algInit(settings, this->findChild<QPlainTextEdit*>("scriptEdit")->toPlainText());
+        algRunning = true;
+    }
+    else
+    {
+        QMessageBox errMsg;
+        errMsg.setText("Алгоритм уже выполняется!");
+        errMsg.exec();
+    }
+}
+
+void MainWindow::on_alg_ended()
+{
+    algRunning = false;
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    if (algRunning)
+    {
+        alg->algEnd();
+    }
+    else
+    {
+        QMessageBox errMsg;
+        errMsg.setText("Алгоритм не выполняется!");
+        errMsg.exec();
+    }
 }

@@ -41,7 +41,8 @@ SOURCES += \
     operation.cpp \
     move.cpp \
     grab.cpp \
-    calibr.cpp
+    calibr.cpp \
+    test.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -51,7 +52,8 @@ HEADERS += \
     operation.h \
     move.h \
     grab.h \
-    calibr.h
+    calibr.h \
+    test.h
 
 FORMS += \
         mainwindow.ui \
