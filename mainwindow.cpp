@@ -33,13 +33,32 @@ void MainWindow::loadSettings(QString pathToSettings)
     settings.clear();
     if (pathToSettings.size())
     {
+        qDebug() << "path to settings file exists";
         QFile openFile(pathToSettings);
-        if (!openFile.open(QIODevice::ReadOnly | QIODevice::Text )) return;
+        if (!openFile.open(QIODevice::ReadWrite | QIODevice::Text )) return;
+        qDebug() << "settings file found and opened";
         while (!openFile.atEnd()) {
             QByteArray lineByteArray = openFile.readLine();
-            QString line = QTextCodec::codecForUtfText(lineByteArray)->toUnicode(lineByteArray);
-            QStringList lineList = line.split('=', QString::SkipEmptyParts);
-            if(lineList.length() == 2) { settings.insert(lineList[0],lineList[1]); }
+            QString line = QTextCodec::codecForUtfText(lineByteArray)->toUnicode(lineByteArray).simplified();
+            line.replace( " ", "" );
+            qDebug() << "setting line with removed spaces before regex: " << line;
+            QRegExp settingsRegExp("\\S{1,20}[=]\\S{1,20}");
+            int posSetting = settingsRegExp.indexIn(line);
+
+            if (posSetting > -1)
+            {
+
+                qDebug() << "settings: " << line;
+                QStringList lineList = line.split('=', QString::SkipEmptyParts);
+                for (QString &s : lineList)
+                {
+                    s = s.trimmed();
+                    qDebug() << "simplifying: " << s;
+                }
+                qDebug() << "linelist: " << lineList[0] << " " << lineList[1];
+                if(lineList.length() == 2) { settings.insert(lineList[0],lineList[1]); }
+            }
+
         }
         openFile.close();
     }
@@ -118,4 +137,9 @@ void MainWindow::on_pushButton_clicked()
         errMsg.setText("Алгоритм не выполняется!");
         errMsg.exec();
     }
+}
+
+void MainWindow::on_settingButton_clicked()
+{
+    loadSettings("settings.txt");
 }

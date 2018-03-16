@@ -2,6 +2,7 @@
 #define MOVE_H
 
 #include <QObject>
+#include <QDebug>
 #include "operation.h"
 #include "port.h"
 

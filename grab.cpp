@@ -10,6 +10,7 @@ void Grab::run(byte& dvg0, byte& dvg1, URTKPort* port)
     // Проверям аргументы
     if ((argList.size() >= 2) && (argList[0] >= 0) && (argList[0] <= 3) && (argList[1] >= 0) && (argList[1] <= 1))
     {
+        qDebug() << "grab запускается";
         // Формируем байт управления
         int dvgbyte[4];
         for (int i = 0; i < 4; i++)

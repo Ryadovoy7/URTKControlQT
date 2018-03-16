@@ -1,18 +1,17 @@
-#ifndef GRAB_H
-#define GRAB_H
+#ifndef FLAG_H
+#define FLAG_H
 
 #include <QObject>
+#include <QDebug>
 #include "operation.h"
 #include "port.h"
-#include <QDebug>
 
-class Grab : public Operation
+class Flag : public Operation
 {
-    Q_OBJECT
 public:
-    Grab(QVector<int> arguments, QObject *parent = 0);
+    Flag(QVector<int> arguments, QObject *parent = 0);
     void run(byte& dvg0, byte& dvg1, URTKPort* port);
     void checkCompletion(byte& dvg0, byte& dvg1, URTKPort* port);
 };
 
-#endif // GRAB_H
+#endif // FLAG_H

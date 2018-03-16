@@ -7,6 +7,7 @@ Move::Move(QVector<int> arguments, QObject *parent) : Operation(arguments, paren
 
 void Move::run(byte& dvg0, byte& dvg1, URTKPort* port)
 {
+    qDebug() << "move run start";
     if ((argList.size() >= 3) && (argList[0] >= 0) && (argList[0] <= 5) && (argList[1] >= -1) && (argList[1] <= 1) && (argList[2] >= 0) && (argList[2] <= 500))
     {
         int dvgbyte[6];
@@ -18,7 +19,7 @@ void Move::run(byte& dvg0, byte& dvg1, URTKPort* port)
         dvgbyte[argList[0]] = argList[1];
         
         port->SetDvgRegs(dvg0 = port->CountDvg0(dvgbyte[0], dvgbyte[1], dvgbyte[2], dvgbyte[3], dvg0), dvg1 = port->CountDvg1(dvgbyte[4], dvgbyte[5], 3, 3, 3, 3, dvg1));
-        
+
         byte s0, s1, s2;
         port->GetSnsRegs(&s0, &s1, &s2);
         
@@ -33,8 +34,8 @@ void Move::run(byte& dvg0, byte& dvg1, URTKPort* port)
         
         runVar[0] = 0;
         runVar[1] = sensors[argList[0]];
-        runVar[2] = argList[1];
-        runVar[3] = startTimer(100);
+        runVar[2] = argList[2];
+        runVar[3] = startTimer(1000);
         
         isStarted = 1;
         
@@ -44,6 +45,7 @@ void Move::run(byte& dvg0, byte& dvg1, URTKPort* port)
         isStarted = 1;
         isCompleted = 1;
     }
+    qDebug() << "move run end";
 }
 
 void Move::checkCompletion(byte& dvg0, byte& dvg1, URTKPort* port)
@@ -82,6 +84,8 @@ void Move::checkCompletion(byte& dvg0, byte& dvg1, URTKPort* port)
             runVar[2] = 0;
         }
     }
+
+    qDebug() << "runvar 2 and sensors arglist 0: " << runVar[2] << sensors[argList[0]];
 
     if ((runVar[2] > 0) && (runVar[1] != sensors[argList[0]]))
     {

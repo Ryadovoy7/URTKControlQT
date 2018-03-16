@@ -266,17 +266,23 @@ void Algorithm::readAlgorithm(QString algText)
 void Algorithm::portInit(const QMap<QString, QString> &settings)
 {
     bool ok;
-    byte data = (byte)settings["LptData"].toUInt(&ok,0);
-    byte status = (byte)settings["LptStatus"].toUInt(&ok,0);
-    byte config = (byte)settings["LptConfig"].toUInt(&ok,0);
 
-    if(data && status && config)
+    if (settings.contains("LptData") && settings.contains("LptStatus") && settings.contains("LptConfig"))
     {
+        byte data = (byte)settings["LptData"].toUInt(&ok,0);
+        qDebug() << "LptData: " << data;
+        byte status = (byte)settings["LptStatus"].toUInt(&ok,0);
+        qDebug() << "LptStatus: " << status;
+        byte config = (byte)settings["LptConfig"].toUInt(&ok,0);
+        qDebug() << "LptConfig: " << config;
+
         LPTPort = new URTKPort(data, status, config, this);
+        qDebug() << "port loaded from settings!";
     }
     else
     {
         LPTPort = new URTKPort(this);
+        qDebug() << "port loaded by default";
     }
 }
 

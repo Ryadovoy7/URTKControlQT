@@ -30,6 +30,8 @@ public:
     void timerEvent(QTimerEvent *event);
     int timerID;
 
+    void startServer();
+
     QWidget* algWindow;
 
     enum opEnum
