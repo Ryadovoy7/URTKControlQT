@@ -11,6 +11,7 @@
 #include <QTimer>
 #include <QMessageBox>
 #include "Algorithm.h"
+#include "urtkserver.h"
 
 namespace Ui {
 class MainWindow;
@@ -27,7 +28,8 @@ public:
     void loadSettings(QString pathToSettings);
     QMap<QString, QString> settings;
 
-    Algorithm* alg;
+    Algorithm* alg = nullptr;
+    URTKServer* serv = nullptr;
 
 private slots:
     void on_saveButton_clicked();
@@ -43,6 +45,10 @@ private slots:
     void on_pushButton_clicked();
 
     void on_settingButton_clicked();
+
+    void on_serverStartButton_clicked();
+
+    void startServer();
 
 private:
     Ui::MainWindow *ui;

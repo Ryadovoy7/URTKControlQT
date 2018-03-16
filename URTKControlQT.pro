@@ -5,6 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT += network
+QT += widgets
 
 
 QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
@@ -44,7 +46,8 @@ SOURCES += \
     calibr.cpp \
     test.cpp \
     flag.cpp \
-    check.cpp
+    check.cpp \
+    urtkserver.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -57,7 +60,8 @@ HEADERS += \
     calibr.h \
     test.h \
     flag.h \
-    check.h
+    check.h \
+    urtkserver.h
 
 FORMS += \
         mainwindow.ui \

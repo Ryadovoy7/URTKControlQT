@@ -143,3 +143,21 @@ void MainWindow::on_settingButton_clicked()
 {
     loadSettings("settings.txt");
 }
+
+void MainWindow::on_serverStartButton_clicked()
+{
+    startServer();
+}
+
+void MainWindow::startServer()
+{
+    //if(nullptr == serv)
+    //{
+        serv = new URTKServer(this);
+    //}
+    //else
+    //{
+    //    delete(serv);
+    //    serv = new URTKServer(this);
+    //}
+}

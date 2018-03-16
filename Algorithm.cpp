@@ -30,7 +30,7 @@ void Algorithm::algInit(const QMap<QString, QString> &settings, QString algText)
     portInit(settings);
 
     // Читаем алгоритм из файла и собираем вектор операций
-    readAlgorithm(algText);
+    readAlgorithm(algText, settings);
 
     // Создаем таймер
     timerID = startTimer(50);
@@ -90,7 +90,8 @@ void Algorithm::timerEvent(QTimerEvent *event)
     }
 }
 
-void Algorithm::readAlgorithm(QString algText)
+
+void Algorithm::readAlgorithm(QString algText, const QMap<QString, QString> &settings)
 {
     QMetaObject algMeta = this->staticMetaObject;
     QMetaEnum opEnumMeta = algMeta.enumerator(algMeta.indexOfEnumerator("opEnum"));
@@ -217,21 +218,74 @@ void Algorithm::readAlgorithm(QString algText)
             case FLAG:
                 if(holdOpGroup)
                 {
+                    if (opVec.size())
+                    {
+                        Flag* bufOp = new Flag(argVec, this);
+                        if(settings.contains("ServerIp") && settings.contains("ServerPort"))
+                        {
+                            bufOp->setServer(settings["ServerIp"], settings["ServerPort"]);
+                        }
 
+                        opVec[opVec.size()-1]->append(bufOp);
+                    }
+                    else
+                    {
+                        opVec.append(new QVector<Operation*>);
+                        Flag* bufOp = new Flag(argVec, this);
+                        if(settings.contains("ServerIp") && settings.contains("ServerPort"))
+                        {
+                            bufOp->setServer(settings["ServerIp"], settings["ServerPort"]);
+                        }
+                        opVec[opVec.size()-1]->append(bufOp);
+                    }
                 }
                 else
                 {
-
+                    {
+                        opVec.append(new QVector<Operation*>);
+                        Flag* bufOp = new Flag(argVec, this);
+                        if(settings.contains("ServerIp") && settings.contains("ServerPort"))
+                        {
+                            bufOp->setServer(settings["ServerIp"], settings["ServerPort"]);
+                        }
+                        opVec[opVec.size()-1]->append(bufOp);
+                    }
                 }
                 break;
             case CHECK:
                 if(holdOpGroup)
                 {
-
+                    if (opVec.size())
+                    {
+                        Check* bufOp = new Check(argVec, this);
+                        if(settings.contains("ServerIp") && settings.contains("ServerPort"))
+                        {
+                            bufOp->setServer(settings["ServerIp"], settings["ServerPort"]);
+                        }
+                        opVec[opVec.size()-1]->append(bufOp);
+                    }
+                    else
+                    {
+                        opVec.append(new QVector<Operation*>);
+                        Check* bufOp = new Check(argVec, this);
+                        if(settings.contains("ServerIp") && settings.contains("ServerPort"))
+                        {
+                            bufOp->setServer(settings["ServerIp"], settings["ServerPort"]);
+                        }
+                        opVec[opVec.size()-1]->append(bufOp);
+                    }
                 }
                 else
                 {
-
+                    {
+                        opVec.append(new QVector<Operation*>);
+                        Check* bufOp = new Check(argVec, this);
+                        if(settings.contains("ServerIp") && settings.contains("ServerPort"))
+                        {
+                            bufOp->setServer(settings["ServerIp"], settings["ServerPort"]);
+                        }
+                        opVec[opVec.size()-1]->append(bufOp);
+                    }
                 }
                 break;
             case TEST:

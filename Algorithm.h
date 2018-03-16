@@ -12,7 +12,11 @@
 #include "calibr.h"
 #include "grab.h"
 #include "move.h"
+#include "flag.h"
+#include "check.h"
 #include "test.h"
+
+#include "urtkserver.h"
 
 class Algorithm : public QObject
 {
@@ -23,14 +27,13 @@ public:
     Algorithm(QObject *parent = 0);
     ~Algorithm();
     URTKPort* LPTPort;
+    URTKServer* serv;
 
     void algInit(const QMap<QString,QString> &settings, QString algText);
     void algEnd();
 
     void timerEvent(QTimerEvent *event);
     int timerID;
-
-    void startServer();
 
     QWidget* algWindow;
 
@@ -53,7 +56,7 @@ private:
 
     byte olddvg0, olddvg1;
 
-    void readAlgorithm(QString algText);
+    void readAlgorithm(QString algText, const QMap<QString,QString> &settings);
 
     void portInit(const QMap<QString,QString> &settings);
 
