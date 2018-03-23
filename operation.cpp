@@ -16,3 +16,8 @@ void Operation::checkCompletion(byte& dvg0, byte& dvg1, URTKPort* port)
 {
     //blank, superclass
 }
+
+void Operation::resetOperation()
+{
+    //blank, superclass
+}

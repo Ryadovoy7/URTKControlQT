@@ -84,3 +84,8 @@ void Flag::handleError()
     tcpSocket->abort();
     qDebug() << "flag error happeed";
 }
+
+void Flag::resetOperation()
+{
+    isStarted = 0; isCompleted = 0;
+}

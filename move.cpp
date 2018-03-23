@@ -113,3 +113,10 @@ void Move::timerEvent(QTimerEvent *event)
     runVar[0] = 1;
     killTimer(runVar[3]);
 }
+
+void Move::resetOperation()
+{
+    isStarted = 0; isCompleted = 0;
+    runVar.clear();
+    runVar.resize(4);
+}

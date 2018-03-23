@@ -69,3 +69,8 @@ void Calibr::checkCompletion(byte& dvg0, byte& dvg1, URTKPort* port)
      }
 
 }
+
+void Calibr::resetOperation()
+{
+    isStarted = 0; isCompleted = 0;
+}

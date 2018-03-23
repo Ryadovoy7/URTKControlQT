@@ -12,6 +12,7 @@ public:
     explicit Operation(QVector<int> arguments, QObject *parent = 0);
     virtual void run(byte& dvg0, byte& dvg1, URTKPort* port);
     virtual void checkCompletion(byte& dvg0, byte& dvg1, URTKPort* port);
+    virtual void resetOperation();
 
     QVector<int> argList;
     QVector<int> runVar;

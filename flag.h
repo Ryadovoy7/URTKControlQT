@@ -17,6 +17,7 @@ public:
     void checkCompletion(byte& dvg0, byte& dvg1, URTKPort* port);
     void setServer(QString adr, QString prt);
     void handleError();
+    void resetOperation();
 
 public slots:
 

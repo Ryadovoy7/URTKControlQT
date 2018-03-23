@@ -12,6 +12,7 @@
 #include <QMessageBox>
 #include "Algorithm.h"
 #include "urtkserver.h"
+#include "settings.h"
 
 namespace Ui {
 class MainWindow;
@@ -30,6 +31,7 @@ public:
 
     Algorithm* alg = nullptr;
     URTKServer* serv = nullptr;
+    Settings* settingsW = nullptr;
 
 private slots:
     void on_saveButton_clicked();
@@ -49,6 +51,8 @@ private slots:
     void on_serverStartButton_clicked();
 
     void startServer();
+
+    void on_settings_screen_button_clicked();
 
 private:
     Ui::MainWindow *ui;

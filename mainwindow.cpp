@@ -151,13 +151,28 @@ void MainWindow::on_serverStartButton_clicked()
 
 void MainWindow::startServer()
 {
-    //if(nullptr == serv)
-    //{
+    if(nullptr == serv)
+    {
         serv = new URTKServer(this);
-    //}
-    //else
-    //{
-    //    delete(serv);
-    //    serv = new URTKServer(this);
-    //}
+    }
+    else
+    {
+        delete(serv);
+        serv = new URTKServer(this);
+    }
+}
+
+void MainWindow::on_settings_screen_button_clicked()
+{
+    if (nullptr == settingsW)
+    {
+        settingsW = new Settings(&settings, 0);
+        settingsW->show();
+    }
+    else
+    {
+        delete settingsW;
+        settingsW = new Settings(&settings, 0);
+        settingsW->show();
+    }
 }

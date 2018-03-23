@@ -46,7 +46,8 @@ public:
         END,
         FLAG,
         CHECK,
-        TEST
+        TEST,
+        REPEAT
     };
 	
 private:
@@ -61,6 +62,8 @@ private:
     void portInit(const QMap<QString,QString> &settings);
 
     void clearOpVec();
+
+    int repeatCount;
 
 signals:
 

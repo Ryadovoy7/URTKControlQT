@@ -37,3 +37,8 @@ void Grab::checkCompletion(byte& dvg0, byte& dvg1, URTKPort* port)
 {
     // Захват заканчивается на функции run(), поэтому здесь пусто
 }
+
+void Grab::resetOperation()
+{
+    isStarted = 0; isCompleted = 0;
+}

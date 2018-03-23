@@ -25,3 +25,8 @@ void Test::timerEvent(QTimerEvent *event)
 {
     isCompleted = 1;
 }
+
+void Test::resetOperation()
+{
+    isStarted = 0; isCompleted = 0;
+}

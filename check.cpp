@@ -80,3 +80,9 @@ void Check::handleError()
     tcpSocket->abort();
     qDebug() << "check error happeed";
 }
+
+void Check::resetOperation()
+{
+    isStarted = 0;
+    isCompleted = 0;
+}

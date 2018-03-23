@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>279</width>
-    <height>414</height>
+    <height>500</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,13 +19,13 @@
   <property name="minimumSize">
    <size>
     <width>279</width>
-    <height>414</height>
+    <height>500</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>279</width>
-    <height>414</height>
+    <height>500</height>
    </size>
   </property>
   <property name="baseSize">
@@ -44,7 +44,7 @@
       <x>0</x>
       <y>0</y>
       <width>278</width>
-      <height>360</height>
+      <height>451</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -122,6 +122,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="settings_screen_button">
+         <property name="text">
+          <string>Настройки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="serverStartButton">
          <property name="text">
           <string>Запустить сервер</string>
@@ -139,7 +146,7 @@
      <x>0</x>
      <y>0</y>
      <width>279</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

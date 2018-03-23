@@ -29,6 +29,9 @@ void Algorithm::algInit(const QMap<QString, QString> &settings, QString algText)
     // Инициализируем LPTPort
     portInit(settings);
 
+    // Устанавливаем число повторений на 0
+    repeatCount = 0;
+
     // Читаем алгоритм из файла и собираем вектор операций
     readAlgorithm(algText, settings);
 
@@ -80,13 +83,31 @@ void Algorithm::timerEvent(QTimerEvent *event)
         // Если блок команд выполнен, переходим к следующему
         if(blockComplete)
         {
+            for(Operation* op : *opVec[opVecIterator])
+            {
+                op->resetOperation();
+            }
             opVecIterator++;
         }
     }
     else
     {
-        algEnd();
-        qDebug() << "algorithm completed!";
+        if (repeatCount > 0)
+        {
+            repeatCount--;
+            qDebug() << "reducing repeatCount";
+        }
+        if (repeatCount != 0)
+        {
+            opVecIterator = 0;
+
+            qDebug() << "repeatCount is " << repeatCount;
+        }
+        else
+        {
+            algEnd();
+            qDebug() << "algorithm completed!";
+        }
     }
 }
 
@@ -112,7 +133,7 @@ void Algorithm::readAlgorithm(QString algText, const QMap<QString, QString> &set
         // Регулярное выражение, по которому мы найдем в строке имя операции
         QRegExp opRegExp("[a-zA-Z]{1,20}");
         // Регулярное выражение для аргументов операции
-        QRegExp argRegExp("[(]([0-9]+[,])*[0-9]+[)]");
+        QRegExp argRegExp("[(]([-]*[0-9]+[,])*[-]*[0-9]+[)]");
 
         // Находим их в строке
         int posOp = opRegExp.indexIn(bufString);
@@ -306,6 +327,12 @@ void Algorithm::readAlgorithm(QString algText, const QMap<QString, QString> &set
                 {
                     opVec.append(new QVector<Operation*>);
                     opVec[opVec.size()-1]->append(new Test(argVec, this));
+                }
+                break;
+            case REPEAT:
+                if ((argVec.length()) && (argVec[0] >= -1) && (argVec[0] <= MAXINT))
+                {
+                    repeatCount = argVec[0];
                 }
                 break;
             default:
